@@ -12,8 +12,6 @@ import { formatCurrency } from "./utils";
 import { unstable_noStore as noStore } from "next/cache";
 // Note: unstable_noStore is an experimental API and may change in the future. If you prefer to use a stable API in your own projects, you can also use the Segment Config Option export const dynamic = "force-dynamic".
 
-
-
 export async function fetchRevenue() {
   // Add noStore() here prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
@@ -23,12 +21,12 @@ export async function fetchRevenue() {
     // Artificially delay a reponse for demo purposes.
     // Don't do this in real life :)
 
-    console.log('Fetching revenue data...');
+    console.log("Fetching revenue data...");
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
 
-    console.log('Data fetch complete after 3 seconds.');
+    console.log("Data fetch complete after 3 seconds.");
 
     return data.rows;
   } catch (error) {
@@ -174,7 +172,6 @@ export async function fetchInvoiceById(id: string) {
       // Convert amount from cents to dollars
       amount: invoice.amount / 100,
     }));
-
     return invoice[0];
   } catch (error) {
     console.error("Database Error:", error);
